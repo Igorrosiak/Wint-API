@@ -1,2 +1,4 @@
-package com.wint.Blog.Dtos;public class BlogResponseDTO {
+package com.wint.Blog.Dtos;
+
+public class BlogResponseDTO {
 }
