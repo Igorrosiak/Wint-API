@@ -29,7 +29,7 @@ public class RecommendationController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Recommendation> create(@RequestBody @Valid BlogRequestDTO blogRequestDTO){
+    public ResponseEntity<Recommendation> create(@RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO){
         var recommendation = new Recommendation();
         BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
         return recommendationService.create(recommendation);
