@@ -39,6 +39,7 @@ public class Blog {
     @Getter
     private String image;
 
+    @NotNull
     // Make User model and modify this
     private String user;
 }
