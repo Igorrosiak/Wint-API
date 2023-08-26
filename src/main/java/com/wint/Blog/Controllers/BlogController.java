@@ -3,6 +3,7 @@ package com.wint.Blog.Controllers;
 import com.wint.Blog.Entitys.Blog;
 import com.wint.Blog.Services.BlogService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,17 +29,21 @@ public class BlogController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Blog> create(@RequestBody @Valid Blog blog){
+    public ResponseEntity<Blog> create(@RequestBody @Valid BlogRequestDTO blogRequestDTO){
+        var blog = new Blog();
+        BeanUtils.copyProperties(blogRequestDTO, blog);
         return blogService.create(blog);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Blog> update(@PathVariable UUID id, @RequestBody @Valid Blog blog){
+    public ResponseEntity<Blog> update(@PathVariable UUID id, @RequestBody @Valid BlogRequestDTO blogRequestDTO){
+        var blog = new Blog();
+        BeanUtils.copyProperties(blogRequestDTO, blog);
         return blogService.update(id, blog);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable UUID id){
-        blogService.delete(id);
+        return blogService.delete(id);
     }
 }

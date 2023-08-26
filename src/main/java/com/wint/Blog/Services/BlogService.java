@@ -11,6 +11,6 @@ public interface BlogService {
     public ResponseEntity<List<Blog>> findAll();
     public ResponseEntity<Optional<Blog>> findById(UUID id);
     public ResponseEntity<Blog> create(Blog blog);
-    public Blog update(UUID id, Blog blog);
+    public ResponseEntity<Blog> update(UUID id, Blog blog);
     public ResponseEntity delete(UUID id);
 }
