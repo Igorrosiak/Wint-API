@@ -1,5 +1,6 @@
 package com.wint.Skill.Controllers;
 
+import com.wint.Skill.Dtos.SkillRequestDTO;
 import com.wint.Skill.Entitys.Skill;
 import com.wint.Skill.Services.SkillService;
 import jakarta.validation.Valid;

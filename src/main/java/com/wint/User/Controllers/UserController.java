@@ -1,5 +1,6 @@
 package com.wint.User.Controllers;
 
+import com.wint.User.Dtos.UserRequestDTO;
 import com.wint.User.Entitys.User;
 import com.wint.User.Services.UserService;
 import jakarta.validation.Valid;

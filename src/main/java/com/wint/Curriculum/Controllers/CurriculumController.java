@@ -1,5 +1,6 @@
 package com.wint.Curriculum.Controllers;
 
+import com.wint.Curriculum.Dtos.CurriculumRequestDTO;
 import com.wint.Curriculum.Entitys.Curriculum;
 import com.wint.Curriculum.Services.CurriculumService;
 import jakarta.validation.Valid;

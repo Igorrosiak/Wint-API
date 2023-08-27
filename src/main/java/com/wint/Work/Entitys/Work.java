@@ -38,11 +38,11 @@ public class Work {
 
     @Getter
     @NotNull
-    private Array<String> tags;
+    private String[] tags;
 
     @Getter
     @NotNull
-    private Array<String> occupations;
+    private String[] occupations;
 
     @NotNull
     // Make User model and modify this

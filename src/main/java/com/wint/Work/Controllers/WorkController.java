@@ -1,5 +1,6 @@
 package com.wint.Work.Controllers;
 
+import com.wint.Work.Dtos.WorkRequestDTO;
 import com.wint.Work.Entitys.Work;
 import com.wint.Work.Services.WorkService;
 import jakarta.validation.Valid;

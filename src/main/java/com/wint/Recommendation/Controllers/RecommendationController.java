@@ -1,5 +1,6 @@
 package com.wint.Recommendation.Controllers;
 
+import com.wint.Recommendation.Dtos.RecommendationRequestDTO;
 import com.wint.Recommendation.Entitys.Recommendation;
 import com.wint.Recommendation.Services.RecommendationService;
 import jakarta.validation.Valid;

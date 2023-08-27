@@ -1,5 +1,6 @@
 package com.wint.Blog.Controllers;
 
+import com.wint.Blog.Dtos.BlogRequestDTO;
 import com.wint.Blog.Entitys.Blog;
 import com.wint.Blog.Services.BlogService;
 import jakarta.validation.Valid;
