@@ -26,6 +26,7 @@ public class User {
 
     @Getter
     @NotNull
+    @Column(unique = true)
     private String email;
 
     @Getter
@@ -53,8 +54,4 @@ public class User {
 
     @Getter
     private String twitterLink;
-
-    @NotNull
-    // Make User model and modify this
-    private String user;
 }
