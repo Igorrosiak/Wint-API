@@ -19,7 +19,7 @@ public class WorkController {
     @Autowired
     WorkService workService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<Work>> findAll(){
         return workService.findAll();
     }

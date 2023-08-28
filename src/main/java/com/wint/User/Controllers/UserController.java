@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<User>> findAll(){
         return userService.findAll();
     }

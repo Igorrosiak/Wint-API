@@ -19,7 +19,7 @@ public class RecommendationController {
     @Autowired
     RecommendationService recommendationService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<Recommendation>> findAll(){
         return recommendationService.findAll();
     }

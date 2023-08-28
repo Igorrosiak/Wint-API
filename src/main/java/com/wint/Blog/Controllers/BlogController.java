@@ -19,7 +19,7 @@ public class BlogController {
     @Autowired
     BlogService blogService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<Blog>> findAll(){
         return blogService.findAll();
     }

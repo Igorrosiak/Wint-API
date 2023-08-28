@@ -19,7 +19,7 @@ public class SkillController {
     @Autowired
     SkillService skillService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<Skill>> findAll(){
         return skillService.findAll();
     }

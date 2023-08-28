@@ -19,7 +19,7 @@ public class CurriculumController {
     @Autowired
     CurriculumService curriculumService;
 
-    @GetMapping("s")
+    @GetMapping("/")
     public ResponseEntity<List<Curriculum>> findAll(){
         return curriculumService.findAll();
     }
