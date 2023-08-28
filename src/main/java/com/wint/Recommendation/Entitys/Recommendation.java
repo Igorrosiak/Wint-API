@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table(name = "recommendation")
+@Table(name = "recommendations")
 @Entity(name = "recommendation")
 @Setter
 @AllArgsConstructor

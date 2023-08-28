@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table(name = "skill")
+@Table(name = "skills")
 @Entity(name = "skill")
 @Setter
 @AllArgsConstructor
