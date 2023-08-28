@@ -28,12 +28,13 @@ public class Recommendation {
     @NotNull
     private String relationship;
 
+    @Getter
     @NotNull
     // Make User model and modify this
-    private String recommendedUser;
+    private String recommendedUserId;
 
     @Getter
     @NotNull
     // Make User model and modify this
-    private String userWhoRecommended;
+    private String userWhoRecommendedId;
 }

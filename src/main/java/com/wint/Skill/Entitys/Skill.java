@@ -32,7 +32,8 @@ public class Skill {
     @NotNull
     private String icon;
 
+    @Getter
     @NotNull
     // Make User model and modify this
-    private String user;
+    private String userId;
 }

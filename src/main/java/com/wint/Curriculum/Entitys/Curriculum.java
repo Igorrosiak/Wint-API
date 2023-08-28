@@ -32,7 +32,8 @@ public class Curriculum {
     @NotNull
     private String image;
 
+    @Getter
     @NotNull
     // Make User model and modify this
-    private String user;
+    private String userId;
 }
