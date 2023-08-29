@@ -2,12 +2,11 @@ package com.wint.Recommendation.Entitys;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Table(name = "recommendations")
 @Entity(name = "recommendation")
@@ -15,26 +14,27 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Recommendation {
-    @Id
-    @Getter
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
 
-    @Getter
-    @NotNull
-    private String description;
+  @Id
+  @Getter
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-    @Getter
-    @NotNull
-    private String relationship;
+  @Getter
+  @NotNull
+  private String description;
 
-    @Getter
-    @NotNull
-    // Make User model and modify this
-    private String recommendedUserId;
+  @Getter
+  @NotNull
+  private String relationship;
 
-    @Getter
-    @NotNull
-    // Make User model and modify this
-    private String userWhoRecommendedId;
+  @Getter
+  @NotNull
+  // Make User model and modify this
+  private String recommendedUserId;
+
+  @Getter
+  @NotNull
+  // Make User model and modify this
+  private String userWhoRecommendedId;
 }

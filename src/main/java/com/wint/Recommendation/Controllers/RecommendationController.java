@@ -4,47 +4,54 @@ import com.wint.Recommendation.Dtos.RecommendationRequestDTO;
 import com.wint.Recommendation.Entitys.Recommendation;
 import com.wint.Recommendation.Services.RecommendationService;
 import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/recommendation")
 public class RecommendationController {
-    @Autowired
-    RecommendationService recommendationService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<Recommendation>> findAll(){
-        return recommendationService.findAll();
-    }
+  @Autowired
+  RecommendationService recommendationService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Recommendation>> findById(@PathVariable UUID id){
-        return recommendationService.findById(id);
-    }
+  @GetMapping("/")
+  public ResponseEntity<List<Recommendation>> findAll() {
+    return recommendationService.findAll();
+  }
 
-    @PostMapping("/")
-    public ResponseEntity<Recommendation> create(@RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO){
-        var recommendation = new Recommendation();
-        BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
-        return recommendationService.create(recommendation);
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<Optional<Recommendation>> findById(
+    @PathVariable UUID id
+  ) {
+    return recommendationService.findById(id);
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Recommendation> update(@PathVariable UUID id, @RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO){
-        var recommendation = new Recommendation();
-        BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
-        return recommendationService.update(id, recommendation);
-    }
+  @PostMapping("/")
+  public ResponseEntity<Recommendation> create(
+    @RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO
+  ) {
+    var recommendation = new Recommendation();
+    BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
+    return recommendationService.create(recommendation);
+  }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable UUID id){
-        return recommendationService.delete(id);
-    }
+  @PutMapping("/{id}")
+  public ResponseEntity<Recommendation> update(
+    @PathVariable UUID id,
+    @RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO
+  ) {
+    var recommendation = new Recommendation();
+    BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
+    return recommendationService.update(id, recommendation);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity delete(@PathVariable UUID id) {
+    return recommendationService.delete(id);
+  }
 }
