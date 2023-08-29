@@ -21,35 +21,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    TokenService tokenService;
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserRepository userRepository;
+  @Autowired
+  TokenService tokenService;
 
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO authenticationDTO){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.email(), authenticationDTO.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
+  @Autowired
+  private UserRepository userRepository;
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+  @PostMapping("/login")
+  public ResponseEntity login(
+    @RequestBody @Valid AuthenticationDTO authenticationDTO
+  ) {
+    var usernamePassword = new UsernamePasswordAuthenticationToken(
+      authenticationDTO.email(),
+      authenticationDTO.password()
+    );
+    var auth = this.authenticationManager.authenticate(usernamePassword);
+
+    var token = tokenService.generateToken((User) auth.getPrincipal());
+    return ResponseEntity.ok(new LoginResponseDTO(token));
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity register(@RequestBody @Valid RegisterDTO registerDTO) {
+    if (this.userRepository.findByEmail(registerDTO.email()) != null) {
+      return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO registerDTO){
-        if(this.userRepository.findByEmail(registerDTO.email()) != null){
-            return ResponseEntity.badRequest().build();
-        }
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.password());
-        User newUser = new User();
-        BeanUtils.copyProperties(registerDTO, newUser);
-        this.userRepository.save(newUser);
-        return ResponseEntity.ok().build();
-    }
-
+    String encryptedPassword = new BCryptPasswordEncoder()
+      .encode(registerDTO.password());
+    User newUser = new User();
+    BeanUtils.copyProperties(registerDTO, newUser);
+    this.userRepository.save(newUser);
+    return ResponseEntity.ok().build();
+  }
 }
