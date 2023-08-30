@@ -1,18 +1,14 @@
 package com.wint.User.Controllers;
 
-import com.wint.User.Dtos.AuthenticationDTO;
-import com.wint.User.Dtos.LoginResponseDTO;
-import com.wint.User.Dtos.RegisterDTO;
+import com.wint.User.Dtos.AuthenticationRequestDTO;
+import com.wint.User.Dtos.AuthenticationResponseDTO;
 import com.wint.User.Entitys.User;
-import com.wint.User.Repositories.UserRepository;
 import com.wint.User.Services.TokenService;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,34 +24,17 @@ public class AuthenticationController {
   @Autowired
   TokenService tokenService;
 
-  @Autowired
-  private UserRepository userRepository;
-
-  @PostMapping("/login")
+  @PostMapping("/")
   public ResponseEntity login(
-    @RequestBody @Valid AuthenticationDTO authenticationDTO
+    @RequestBody @Valid AuthenticationRequestDTO authenticationRequestDTO
   ) {
     var usernamePassword = new UsernamePasswordAuthenticationToken(
-      authenticationDTO.email(),
-      authenticationDTO.password()
+      authenticationRequestDTO.email(),
+      authenticationRequestDTO.password()
     );
-    var auth = this.authenticationManager.authenticate(usernamePassword);
+    var auth = authenticationManager.authenticate(usernamePassword);
 
     var token = tokenService.generateToken((User) auth.getPrincipal());
-    return ResponseEntity.ok(new LoginResponseDTO(token));
-  }
-
-  @PostMapping("/register")
-  public ResponseEntity register(@RequestBody @Valid RegisterDTO registerDTO) {
-    if (this.userRepository.findByEmail(registerDTO.email()) != null) {
-      return ResponseEntity.badRequest().build();
-    }
-
-    String encryptedPassword = new BCryptPasswordEncoder()
-      .encode(registerDTO.password());
-    User newUser = new User();
-    BeanUtils.copyProperties(registerDTO, newUser);
-    this.userRepository.save(newUser);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok(new AuthenticationResponseDTO(token));
   }
 }
