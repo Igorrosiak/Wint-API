@@ -1,5 +1,6 @@
 package com.wint.User.Controllers;
 
+import com.wint.User.Dtos.RegisterDTO;
 import com.wint.User.Dtos.UserRequestDTO;
 import com.wint.User.Entitys.User;
 import com.wint.User.Services.UserService;
@@ -10,6 +11,7 @@ import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,12 +32,12 @@ public class UserController {
   }
 
   @PostMapping("/")
-  public ResponseEntity<User> create(
-    @RequestBody @Valid UserRequestDTO userRequestDTO
-  ) {
-    var user = new User();
-    BeanUtils.copyProperties(userRequestDTO, user);
-    return userService.create(user);
+  public ResponseEntity create(@RequestBody @Valid RegisterDTO registerDTO) {
+    String encryptedPassword = new BCryptPasswordEncoder()
+            .encode(registerDTO.password());
+    User newUser = new User();
+    BeanUtils.copyProperties(registerDTO, newUser);
+    return userService.create(newUser);
   }
 
   @PutMapping("/{id}")
