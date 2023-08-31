@@ -1,5 +1,6 @@
 package com.wint.Recommendation.Services;
 
+import com.wint.Recommendation.Dtos.RecommendationRequestDTO;
 import com.wint.Recommendation.Entitys.Recommendation;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +12,11 @@ public interface RecommendationService {
 
   public ResponseEntity<Optional<Recommendation>> findById(UUID id);
 
-  public ResponseEntity<Recommendation> create(Recommendation recommendation);
+  public ResponseEntity<Recommendation> create(RecommendationRequestDTO recommendationRequestDTO);
 
   public ResponseEntity<Recommendation> update(
     UUID id,
-    Recommendation Recommendation
+    RecommendationRequestDTO recommendationRequestDTO
   );
 
   public ResponseEntity delete(UUID id);

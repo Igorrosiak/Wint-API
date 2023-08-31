@@ -9,32 +9,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "recommendations")
-@Entity(name = "recommendation")
+@Entity(name = "recommendations")
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Recommendation {
 
   @Id
-  @Getter
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Getter
   @NotNull
   private String description;
 
-  @Getter
   @NotNull
   private String relationship;
 
-  @Getter
   @NotNull
-  // Make User model and modify this
   private String recommendedUserId;
 
-  @Getter
   @NotNull
-  // Make User model and modify this
-  private String userWhoRecommendedId;
+  private String idUserWhoRecommended;
 }

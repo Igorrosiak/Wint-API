@@ -35,9 +35,7 @@ public class RecommendationController {
   public ResponseEntity<Recommendation> create(
     @RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO
   ) {
-    var recommendation = new Recommendation();
-    BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
-    return recommendationService.create(recommendation);
+    return recommendationService.create(recommendationRequestDTO);
   }
 
   @PutMapping("/{id}")
@@ -45,9 +43,7 @@ public class RecommendationController {
     @PathVariable UUID id,
     @RequestBody @Valid RecommendationRequestDTO recommendationRequestDTO
   ) {
-    var recommendation = new Recommendation();
-    BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
-    return recommendationService.update(id, recommendation);
+    return recommendationService.update(id, recommendationRequestDTO);
   }
 
   @DeleteMapping("/{id}")

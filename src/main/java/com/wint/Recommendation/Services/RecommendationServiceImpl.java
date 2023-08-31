@@ -1,10 +1,13 @@
 package com.wint.Recommendation.Services;
 
+import com.wint.Recommendation.Dtos.RecommendationRequestDTO;
 import com.wint.Recommendation.Entitys.Recommendation;
 import com.wint.Recommendation.Repositories.RecommendationRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +48,10 @@ public class RecommendationServiceImpl implements RecommendationService {
   }
 
   @Override
-  public ResponseEntity<Recommendation> create(Recommendation recommendation) {
+  public ResponseEntity<Recommendation> create(RecommendationRequestDTO recommendationRequestDTO) {
     try {
+      var recommendation = new Recommendation();
+      BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
       return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(recommendationRepository.save(recommendation));
@@ -58,7 +63,7 @@ public class RecommendationServiceImpl implements RecommendationService {
   @Override
   public ResponseEntity<Recommendation> update(
     UUID id,
-    Recommendation recommendation
+    RecommendationRequestDTO recommendationRequestDTO
   ) {
     try {
       Optional<Recommendation> recommendationOptional = recommendationRepository.findById(
@@ -67,6 +72,8 @@ public class RecommendationServiceImpl implements RecommendationService {
       if (recommendationOptional.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
       }
+      var recommendation = recommendationOptional.get();
+      BeanUtils.copyProperties(recommendationRequestDTO, recommendation);
       return ResponseEntity
         .status(HttpStatus.OK)
         .body(recommendationRepository.save(recommendation));
