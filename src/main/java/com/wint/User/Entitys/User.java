@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
-
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -31,6 +30,7 @@ public class User implements UserDetails {
   private String password;
   @NotNull
   private String birthDate;
+  @NotNull
   private UserRoleENUM role;
   private String presentation;
   private String githubLink;
@@ -38,6 +38,14 @@ public class User implements UserDetails {
   private String instagramLink;
   private String facebookLink;
   private String twitterLink;
+
+  public User(String name, String email, String password, String birthDate, UserRoleENUM role){
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.birthDate = birthDate;
+    this.role = role;
+  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
