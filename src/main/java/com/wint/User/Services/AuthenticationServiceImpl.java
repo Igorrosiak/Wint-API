@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 authenticationRequestDTO.email(),
                 authenticationRequestDTO.password()
         );
-        var auth = authenticationManager.authenticate(usernamePassword);
+        var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
         return ResponseEntity.ok(new AuthenticationResponseDTO(token));
