@@ -33,9 +33,7 @@ public class SkillController {
   public ResponseEntity<Skill> create(
     @RequestBody @Valid SkillRequestDTO skillRequestDTO
   ) {
-    var skill = new Skill();
-    BeanUtils.copyProperties(skillRequestDTO, skill);
-    return skillService.create(skill);
+    return skillService.create(skillRequestDTO);
   }
 
   @PutMapping("/{id}")
@@ -43,9 +41,7 @@ public class SkillController {
     @PathVariable UUID id,
     @RequestBody @Valid SkillRequestDTO skillRequestDTO
   ) {
-    var skill = new Skill();
-    BeanUtils.copyProperties(skillRequestDTO, skill);
-    return skillService.update(id, skill);
+    return skillService.update(id, skillRequestDTO);
   }
 
   @DeleteMapping("/{id}")

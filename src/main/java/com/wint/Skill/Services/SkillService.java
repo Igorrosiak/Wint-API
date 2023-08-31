@@ -1,5 +1,6 @@
 package com.wint.Skill.Services;
 
+import com.wint.Skill.Dtos.SkillRequestDTO;
 import com.wint.Skill.Entitys.Skill;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,9 @@ public interface SkillService {
 
   public ResponseEntity<Optional<Skill>> findById(UUID id);
 
-  public ResponseEntity<Skill> create(Skill skill);
+  public ResponseEntity<Skill> create(SkillRequestDTO skillRequestDTO);
 
-  public ResponseEntity<Skill> update(UUID id, Skill skill);
+  public ResponseEntity<Skill> update(UUID id, SkillRequestDTO skillRequestDTO);
 
   public ResponseEntity delete(UUID id);
 }

@@ -6,5 +6,5 @@ public record SkillRequestDTO(
   @NotNull String name,
   @NotNull String description,
   @NotNull String icon,
-  @NotNull String user
+  @NotNull String userId
 ) {}

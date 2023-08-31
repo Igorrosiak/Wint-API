@@ -1,10 +1,13 @@
 package com.wint.Skill.Services;
 
+import com.wint.Skill.Dtos.SkillRequestDTO;
 import com.wint.Skill.Entitys.Skill;
 import com.wint.Skill.Repositories.SkillRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +46,10 @@ public class SkillServiceImpl implements SkillService {
   }
 
   @Override
-  public ResponseEntity<Skill> create(Skill skill) {
+  public ResponseEntity<Skill> create(SkillRequestDTO skillRequestDTO) {
     try {
+      var skill = new Skill();
+      BeanUtils.copyProperties(skillRequestDTO, skill);
       return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(skillRepository.save(skill));
@@ -54,12 +59,14 @@ public class SkillServiceImpl implements SkillService {
   }
 
   @Override
-  public ResponseEntity<Skill> update(UUID id, Skill skill) {
+  public ResponseEntity<Skill> update(UUID id, SkillRequestDTO skillRequestDTO) {
     try {
       Optional<Skill> skillOptional = skillRepository.findById(id);
       if (skillOptional.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
       }
+      var skill = skillOptional.get();
+      BeanUtils.copyProperties(skillRequestDTO, skill);
       return ResponseEntity
         .status(HttpStatus.OK)
         .body(skillRepository.save(skill));
