@@ -8,5 +8,5 @@ public record BlogRequestDTO(
   @NotNull String content,
   @NotNull String date,
   @NotNull String image,
-  @NotNull String user
+  @NotNull String userId
 ) {}

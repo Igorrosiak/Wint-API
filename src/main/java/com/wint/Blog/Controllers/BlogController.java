@@ -33,9 +33,7 @@ public class BlogController {
   public ResponseEntity<Blog> create(
     @RequestBody @Valid BlogRequestDTO blogRequestDTO
   ) {
-    var blog = new Blog();
-    BeanUtils.copyProperties(blogRequestDTO, blog);
-    return blogService.create(blog);
+    return blogService.create(blogRequestDTO);
   }
 
   @PutMapping("/{id}")
@@ -43,9 +41,7 @@ public class BlogController {
     @PathVariable UUID id,
     @RequestBody @Valid BlogRequestDTO blogRequestDTO
   ) {
-    var blog = new Blog();
-    BeanUtils.copyProperties(blogRequestDTO, blog);
-    return blogService.update(id, blog);
+    return blogService.update(id, blogRequestDTO);
   }
 
   @DeleteMapping("/{id}")

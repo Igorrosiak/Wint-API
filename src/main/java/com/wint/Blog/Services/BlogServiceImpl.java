@@ -1,10 +1,13 @@
 package com.wint.Blog.Services;
 
+import com.wint.Blog.Dtos.BlogRequestDTO;
 import com.wint.Blog.Entitys.Blog;
 import com.wint.Blog.Repositories.BlogRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +46,10 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public ResponseEntity<Blog> create(Blog blog) {
+  public ResponseEntity<Blog> create(BlogRequestDTO blogRequestDTO) {
     try {
+      var blog = new Blog();
+      BeanUtils.copyProperties(blogRequestDTO, blog);
       return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(blogRepository.save(blog));
@@ -54,12 +59,14 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public ResponseEntity<Blog> update(UUID id, Blog blog) {
+  public ResponseEntity<Blog> update(UUID id, BlogRequestDTO blogRequestDTO) {
     try {
       Optional<Blog> blogOptional = blogRepository.findById(id);
       if (blogOptional.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
       }
+      var blog = blogOptional.get();
+      BeanUtils.copyProperties(blogRequestDTO, blog);
       return ResponseEntity
         .status(HttpStatus.OK)
         .body(blogRepository.save(blog));
