@@ -1,5 +1,6 @@
 package com.wint.User.Services;
 
+import com.wint.User.Dtos.RegisterDTO;
 import com.wint.User.Entitys.User;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ public interface UserService {
 
   public ResponseEntity<Optional<User>> findById(UUID id);
 
-  public ResponseEntity<User> create(User user);
+  public ResponseEntity<User> create(RegisterDTO registerDTO);
 
   public ResponseEntity<User> update(UUID id, User user);
 

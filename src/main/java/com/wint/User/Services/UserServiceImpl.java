@@ -1,5 +1,6 @@
 package com.wint.User.Services;
 
+import com.wint.User.Dtos.RegisterDTO;
 import com.wint.User.Entitys.User;
 import com.wint.User.Repositories.UserRepository;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,11 +45,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<User> create(User user) {
+  public ResponseEntity<User> create(RegisterDTO registerDTO) {
     try {
-      return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body(userRepository.save(user));
+      String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.password());
+      User newUser = new User(registerDTO.name(), registerDTO.email(), encryptedPassword, registerDTO.birthDate(), registerDTO.role());
+      return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(newUser));
     } catch (Exception e) {
       return ResponseEntity.badRequest().build();
     }

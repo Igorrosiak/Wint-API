@@ -33,11 +33,7 @@ public class UserController {
 
   @PostMapping("/")
   public ResponseEntity<User> create(@RequestBody @Valid RegisterDTO registerDTO) {
-    String encryptedPassword = new BCryptPasswordEncoder()
-            .encode(registerDTO.password());
-    User newUser = new User();
-    BeanUtils.copyProperties(registerDTO, newUser);
-    return userService.create(newUser);
+    return userService.create(registerDTO);
   }
 
   @PutMapping("/{id}")
