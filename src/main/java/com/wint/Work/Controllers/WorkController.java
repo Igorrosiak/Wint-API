@@ -33,9 +33,7 @@ public class WorkController {
   public ResponseEntity<Work> create(
     @RequestBody @Valid WorkRequestDTO workRequestDTO
   ) {
-    var work = new Work();
-    BeanUtils.copyProperties(workRequestDTO, work);
-    return workService.create(work);
+    return workService.create(workRequestDTO);
   }
 
   @PutMapping("/{id}")
@@ -43,9 +41,7 @@ public class WorkController {
     @PathVariable UUID id,
     @RequestBody @Valid WorkRequestDTO workRequestDTO
   ) {
-    var work = new Work();
-    BeanUtils.copyProperties(workRequestDTO, work);
-    return workService.update(id, work);
+    return workService.update(id, workRequestDTO);
   }
 
   @DeleteMapping("/{id}")

@@ -9,5 +9,5 @@ public record WorkRequestDTO(
   @NotNull String endDate,
   @NotNull String[] tags,
   @NotNull String[] occupations,
-  @NotNull String user
+  @NotNull String userId
 ) {}

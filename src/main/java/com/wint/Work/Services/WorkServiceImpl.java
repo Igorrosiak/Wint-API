@@ -1,10 +1,13 @@
 package com.wint.Work.Services;
 
+import com.wint.Work.Dtos.WorkRequestDTO;
 import com.wint.Work.Entitys.Work;
 import com.wint.Work.Repositories.WorkRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +46,10 @@ public class WorkServiceImpl implements WorkService {
   }
 
   @Override
-  public ResponseEntity<Work> create(Work work) {
+  public ResponseEntity<Work> create(WorkRequestDTO workRequestDTO) {
     try {
+      var work = new Work();
+      BeanUtils.copyProperties(workRequestDTO, work);
       return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(workRepository.save(work));
@@ -54,12 +59,14 @@ public class WorkServiceImpl implements WorkService {
   }
 
   @Override
-  public ResponseEntity<Work> update(UUID id, Work work) {
+  public ResponseEntity<Work> update(UUID id, WorkRequestDTO workRequestDTO) {
     try {
       Optional<Work> workOptional = workRepository.findById(id);
       if (workOptional.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
       }
+      var work = workOptional.get();
+      BeanUtils.copyProperties(workRequestDTO, work);
       return ResponseEntity
         .status(HttpStatus.OK)
         .body(workRepository.save(work));
