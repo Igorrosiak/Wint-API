@@ -32,7 +32,7 @@ public class UserController {
   }
 
   @PostMapping("/")
-  public ResponseEntity create(@RequestBody @Valid RegisterDTO registerDTO) {
+  public ResponseEntity<User> create(@RequestBody @Valid RegisterDTO registerDTO) {
     String encryptedPassword = new BCryptPasswordEncoder()
             .encode(registerDTO.password());
     User newUser = new User();
