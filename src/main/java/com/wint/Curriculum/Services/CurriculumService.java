@@ -1,5 +1,6 @@
 package com.wint.Curriculum.Services;
 
+import com.wint.Curriculum.Dtos.CurriculumRequestDTO;
 import com.wint.Curriculum.Entitys.Curriculum;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,9 @@ public interface CurriculumService {
 
   public ResponseEntity<Optional<Curriculum>> findById(UUID id);
 
-  public ResponseEntity<Curriculum> create(Curriculum curriculum);
+  public ResponseEntity<Curriculum> create(CurriculumRequestDTO curriculumRequestDTO);
 
-  public ResponseEntity<Curriculum> update(UUID id, Curriculum curriculum);
+  public ResponseEntity<Curriculum> update(UUID id, CurriculumRequestDTO curriculumRequestDTO);
 
   public ResponseEntity delete(UUID id);
 }

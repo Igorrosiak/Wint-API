@@ -33,9 +33,7 @@ public class CurriculumController {
   public ResponseEntity<Curriculum> create(
     @RequestBody @Valid CurriculumRequestDTO curriculumRequestDTO
   ) {
-    var curriculum = new Curriculum();
-    BeanUtils.copyProperties(curriculumRequestDTO, curriculum);
-    return curriculumService.create(curriculum);
+    return curriculumService.create(curriculumRequestDTO);
   }
 
   @PutMapping("/{id}")
@@ -43,9 +41,7 @@ public class CurriculumController {
     @PathVariable UUID id,
     @RequestBody @Valid CurriculumRequestDTO curriculumRequestDTO
   ) {
-    var curriculum = new Curriculum();
-    BeanUtils.copyProperties(curriculumRequestDTO, curriculum);
-    return curriculumService.update(id, curriculum);
+    return curriculumService.update(id, curriculumRequestDTO);
   }
 
   @DeleteMapping("/{id}")

@@ -1,10 +1,13 @@
 package com.wint.Curriculum.Services;
 
+import com.wint.Curriculum.Dtos.CurriculumRequestDTO;
 import com.wint.Curriculum.Entitys.Curriculum;
 import com.wint.Curriculum.Repositories.CurriculumRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +48,10 @@ public class CurriculumServiceImpl implements CurriculumService {
   }
 
   @Override
-  public ResponseEntity<Curriculum> create(Curriculum curriculum) {
+  public ResponseEntity<Curriculum> create(CurriculumRequestDTO curriculumRequestDTO) {
     try {
+      var curriculum = new Curriculum();
+      BeanUtils.copyProperties(curriculumRequestDTO, curriculum);
       return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(curriculumRepository.save(curriculum));
@@ -56,7 +61,7 @@ public class CurriculumServiceImpl implements CurriculumService {
   }
 
   @Override
-  public ResponseEntity<Curriculum> update(UUID id, Curriculum curriculum) {
+  public ResponseEntity<Curriculum> update(UUID id, CurriculumRequestDTO curriculumRequestDTO) {
     try {
       Optional<Curriculum> curriculumOptional = curriculumRepository.findById(
         id
@@ -64,6 +69,8 @@ public class CurriculumServiceImpl implements CurriculumService {
       if (curriculumOptional.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
       }
+      var curriculum = curriculumOptional.get();
+      BeanUtils.copyProperties(curriculumRequestDTO, curriculum);
       return ResponseEntity
         .status(HttpStatus.OK)
         .body(curriculumRepository.save(curriculum));
