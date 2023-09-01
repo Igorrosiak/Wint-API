@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
   public ResponseEntity<User> create(RegisterDTO registerDTO) {
     try {
       String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.password());
-      User newUser = new User(registerDTO.name(), registerDTO.email(), encryptedPassword, registerDTO.birthDate(), registerDTO.role());
+      User newUser = new User(registerDTO.name(), registerDTO.username(), registerDTO.email(), encryptedPassword, registerDTO.birthDate(), registerDTO.role());
       return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(newUser));
     } catch (Exception e) {
       return ResponseEntity.badRequest().build();

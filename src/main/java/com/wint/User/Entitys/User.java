@@ -42,8 +42,9 @@ public class User implements UserDetails {
   private String facebookLink;
   private String twitterLink;
 
-  public User(String name, String email, String password, String birthDate, UserRoleENUM role){
+  public User(String name, String username, String email, String password, String birthDate, UserRoleENUM role){
     this.name = name;
+    this.username = username;
     this.email = email;
     this.password = password;
     this.birthDate = birthDate;
