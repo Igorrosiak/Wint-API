@@ -20,27 +20,52 @@ import org.springframework.security.core.userdetails.UserDetails;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
   @Id
+  @Setter
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+
+  @Setter
   @NotNull
   private String name;
+
+  @Setter
   @NotNull
   @Column(unique = true)
   private String username;
+
+  @Setter
   @NotNull
   @Column(unique = true)
   private String email;
+
+  @Setter
   @NotNull
   private String password;
+
+  @Setter
   @NotNull
   private String birthDate;
+
+  @Setter
   @NotNull
   private UserRoleENUM role;
+
+  @Setter
   private String presentation;
+
+  @Setter
   private String githubLink;
+
+  @Setter
   private String linkedinLink;
+
+  @Setter
   private String instagramLink;
+
+  @Setter
   private String facebookLink;
+
+  @Setter
   private String twitterLink;
   @OneToMany(mappedBy = "user")
   private List<Skill> skills;
