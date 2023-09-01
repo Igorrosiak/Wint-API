@@ -12,6 +12,8 @@ public interface UserService {
 
   public ResponseEntity<Optional<User>> findById(UUID id);
 
+  public ResponseEntity<Optional<User>> findByUsername(String username);
+
   public ResponseEntity<User> create(RegisterDTO registerDTO);
 
   public ResponseEntity<User> update(UUID id, User user);

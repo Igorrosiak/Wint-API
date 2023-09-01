@@ -45,6 +45,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public ResponseEntity<Optional<User>> findByUsername(String username) {
+    try {
+      Optional<User> userOptional = userRepository.findByUsername(username);
+      if (userOptional.isEmpty()) {
+        return ResponseEntity.notFound().build();
+      }
+      return ResponseEntity.status(HttpStatus.OK).body(userOptional);
+    } catch (Exception e) {
+      return ResponseEntity.internalServerError().build();
+    }
+  }
+
+  @Override
   public ResponseEntity<User> create(RegisterDTO registerDTO) {
     try {
       String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.password());

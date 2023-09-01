@@ -31,6 +31,11 @@ public class UserController {
     return userService.findById(id);
   }
 
+  @GetMapping("/username/{username}")
+  public ResponseEntity<Optional<User>> findById(@PathVariable String username) {
+    return userService.findByUsername(username);
+  }
+
   @PostMapping("/")
   public ResponseEntity<User> create(@RequestBody @Valid RegisterDTO registerDTO) {
     return userService.create(registerDTO);
