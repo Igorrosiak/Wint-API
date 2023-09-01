@@ -1,5 +1,6 @@
 package com.wint.User.Entitys;
 
+import com.wint.Skill.Entitys.Skill;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
@@ -41,6 +42,8 @@ public class User implements UserDetails {
   private String instagramLink;
   private String facebookLink;
   private String twitterLink;
+  @OneToMany(mappedBy = "user")
+  private List<Skill> skills;
 
   public User(String name, String username, String email, String password, String birthDate, UserRoleENUM role){
     this.name = name;
