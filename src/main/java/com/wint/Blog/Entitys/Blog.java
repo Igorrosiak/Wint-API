@@ -1,5 +1,6 @@
 package com.wint.Blog.Entitys;
 
+import com.wint.User.Entitys.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
@@ -15,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Blog {
-
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -35,5 +35,7 @@ public class Blog {
   private String image;
 
   @NotNull
-  private String userId;
+  @ManyToOne
+  @JoinColumn(name="user_id")
+  private User user;
 }

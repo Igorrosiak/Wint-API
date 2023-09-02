@@ -1,5 +1,6 @@
 package com.wint.Work.Entitys;
 
+import com.wint.User.Entitys.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
@@ -38,5 +39,7 @@ public class Work {
   private String[] occupations;
 
   @NotNull
-  private String userId;
+  @ManyToOne
+  @JoinColumn(name="user_id")
+  private User user;
 }

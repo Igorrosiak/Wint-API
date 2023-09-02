@@ -1,5 +1,6 @@
 package com.wint.Curriculum.Entitys;
 
+import com.wint.User.Entitys.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
@@ -30,5 +31,7 @@ public class Curriculum {
   private String image;
 
   @NotNull
-  private String userId;
+  @ManyToOne
+  @JoinColumn(name="user_id")
+  private User user;
 }

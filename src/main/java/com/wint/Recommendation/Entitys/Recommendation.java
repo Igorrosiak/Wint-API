@@ -1,5 +1,6 @@
 package com.wint.Recommendation.Entitys;
 
+import com.wint.User.Entitys.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
@@ -27,8 +28,10 @@ public class Recommendation {
   private String relationship;
 
   @NotNull
-  private String recommendedUserId;
+  @ManyToOne
+  @JoinColumn(name="user_id")
+  private User user;
 
   @NotNull
-  private String idUserWhoRecommended;
+  private String userWhoRecommended;
 }
