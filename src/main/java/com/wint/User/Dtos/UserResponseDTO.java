@@ -2,7 +2,7 @@ package com.wint.User.Dtos;
 
 import jakarta.validation.constraints.NotNull;
 
-public record UserRequestDTO(
+public record UserResponseDTO(
   @NotNull String name,
   @NotNull String email,
   @NotNull String password,

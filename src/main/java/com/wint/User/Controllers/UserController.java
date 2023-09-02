@@ -1,7 +1,7 @@
 package com.wint.User.Controllers;
 
 import com.wint.User.Dtos.RegisterDTO;
-import com.wint.User.Dtos.UserRequestDTO;
+import com.wint.User.Dtos.UserResponseDTO;
 import com.wint.User.Entitys.User;
 import com.wint.User.Services.UserService;
 import jakarta.validation.Valid;
@@ -44,10 +44,10 @@ public class UserController {
   @PutMapping("/{id}")
   public ResponseEntity<User> update(
     @PathVariable UUID id,
-    @RequestBody @Valid UserRequestDTO userRequestDTO
+    @RequestBody @Valid UserResponseDTO userResponseDTO
   ) {
     var user = new User();
-    BeanUtils.copyProperties(userRequestDTO, user);
+    BeanUtils.copyProperties(userResponseDTO, user);
     return userService.update(id, user);
   }
 
