@@ -1,6 +1,10 @@
 package com.wint.User.Entitys;
 
+import com.wint.Blog.Entitys.Blog;
+import com.wint.Curriculum.Entitys.Curriculum;
+import com.wint.Recommendation.Entitys.Recommendation;
 import com.wint.Skill.Entitys.Skill;
+import com.wint.Work.Entitys.Work;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
@@ -14,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "users")
 @Entity(name = "users")
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -67,8 +70,21 @@ public class User implements UserDetails {
 
   @Setter
   private String twitterLink;
+
+  @OneToMany(mappedBy = "user")
+  private List<Blog> blogs;
+
+  @OneToMany(mappedBy = "user")
+  private List<Curriculum> curriculums;
+
+  @OneToMany(mappedBy = "user")
+  private List<Recommendation> recommendations;
+
   @OneToMany(mappedBy = "user")
   private List<Skill> skills;
+
+  @OneToMany(mappedBy = "user")
+  private List<Work> works;
 
   public User(String name, String username, String email, String password, String birthDate, UserRoleENUM role){
     this.name = name;
